@@ -13,11 +13,11 @@ export default function ServerSideProps({ users}: Props ): JSX.Element {
       <table>
         <thead>
           <tr>
-            <th colSpan={3} className='topnav'>Rendered By React JS | Server side rendered</th>
+            <th colSpan={4} className='topnav'>Rendered By React JS | Server side rendered</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user: User) => <UserRow user={user} />)}
+          {users.map((user: User) => <UserRow user={user}  key={user.id}/>)}
         </tbody>
       </table>
     </div>

@@ -25,11 +25,11 @@ export default function Home({ users}: Props ): JSX.Element {
       <table>
         <thead>
           <tr>
-            <th colSpan={3} className='topnav'>Rendered By Next JS | Client side rendered</th>
+            <th colSpan={4} className='topnav'>Rendered By Next JS | Client side rendered</th>
           </tr>
         </thead>
         <tbody>
-          {reactData.map((user,idx) => <UserRow  key={idx}  user={user} />)}
+          {reactData.map((user: User,idx:number) => <UserRow  key={idx}  user={user} />)}
         </tbody>
 
       </table>
@@ -38,11 +38,11 @@ export default function Home({ users}: Props ): JSX.Element {
       <table>
         <thead>
           <tr>
-            <th colSpan={3} className='topnav'>Rendered By React JS | Server side rendered</th>
+            <th colSpan={4} className='topnav'>Rendered By React JS | Server side rendered</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user: User) => <UserRow key="{user.id}" user={user} />)}
+          {users.map((user: User,idx: number) => <UserRow key={user.id} user={user} />)}
         </tbody>
       </table>
     </>

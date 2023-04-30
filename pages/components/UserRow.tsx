@@ -5,7 +5,7 @@ interface IProps {
  }
 // deconstructed props
 export default function UserRow({user}:IProps) {
-
+debugger
   return (
         <tr key={user.id}>
             <td>{user.id}</td>

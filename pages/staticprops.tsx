@@ -11,11 +11,11 @@ export default function StaticProps({ users }: Props) {
             <table>
                 <thead>
                     <tr>
-                        <th colSpan={3} className='topnav'>Rendered By Next JS | Client side rendered</th>
+                        <th colSpan={4} className='topnav'>Rendered By Next JS | Client side rendered</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => <UserRow key="{id}" user={user} />)}
+                    {users.map(user => <UserRow key={user.id} user={user} />)}
                 </tbody>
 
             </table>
