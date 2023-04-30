@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
 import UserRow from './components/UserRow';
 import { User, Users } from './types/User';
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 
-
-export default function Home({ users }): JSX.Element {
+type Props = {
+  user: User,
+  users: Users
+};
+export default function Home({ users}: Props ): JSX.Element {
   const [reactData, setReactData] = useState([]);
   useEffect(() => {
-    debugger
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(data => {
-        setReactData(data);
+        // debugger
+        setReactData(data);  
       }).catch((e) => { console.log(e) });
   }, []);
 
@@ -26,7 +29,7 @@ export default function Home({ users }): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {reactData.map(user => <UserRow  key="{id}"  user={user} />)}
+          {reactData.map((user,idx) => <UserRow  key={idx}  user={user} />)}
         </tbody>
 
       </table>
@@ -39,7 +42,7 @@ export default function Home({ users }): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {users.map((user: User) => <UserRow key="{user}" user={user} />)}
+          {users.map((user: User) => <UserRow key="{user.id}" user={user} />)}
         </tbody>
       </table>
     </>
@@ -48,10 +51,11 @@ export default function Home({ users }): JSX.Element {
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  debugger
-  console.log('Logging : ' + context.res);
+ 
   const data = await fetch('https://jsonplaceholder.typicode.com/users');
+  // debugger
   const users: Users = await data.json();
+  console.log('Logging : ', users);
   return { props: { users } }
 }
 
