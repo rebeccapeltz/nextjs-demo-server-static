@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react'
 import UserRow from './components/UserRow';
-import { User, Users } from './types/User';
 import { GetServerSideProps, NextPage } from 'next'
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
+interface Users extends Array<User> {}
 
 type Props = {
   user: User,
   users: Users
 };
-export default function Home({ users}: Props ): JSX.Element {
+export default function Home({ users }: Props): JSX.Element {
   const [reactData, setReactData] = useState([]);
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(data => {
         // debugger
-        setReactData(data);  
+        setReactData(data);
       }).catch((e) => { console.log(e) });
   }, []);
 
@@ -29,7 +37,7 @@ export default function Home({ users}: Props ): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {reactData.map((user: User,idx:number) => <UserRow  key={idx}  user={user} />)}
+          {reactData.map((user: User, idx: number) => <UserRow key={idx} user={user} />)}
         </tbody>
 
       </table>
@@ -42,7 +50,7 @@ export default function Home({ users}: Props ): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {users.map((user: User,idx: number) => <UserRow key={user.id} user={user} />)}
+          {users.map((user: User, idx: number) => <UserRow key={user.id} user={user} />)}
         </tbody>
       </table>
     </>
@@ -51,7 +59,7 @@ export default function Home({ users}: Props ): JSX.Element {
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
- 
+
   const data = await fetch('https://jsonplaceholder.typicode.com/users');
   // debugger
   const users: Users = await data.json();

@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import UserRow from './components/UserRow';
-import { User, Users } from './types/User';
+
+interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+}
+interface Users extends Array<User> { }
 
 type Props = {
     users: Users

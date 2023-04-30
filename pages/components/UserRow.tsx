@@ -1,5 +1,12 @@
 import React from 'react'
-import {User} from '../types/User'
+
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
 interface IProps {
     user: User
  }
